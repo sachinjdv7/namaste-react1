@@ -4,6 +4,10 @@ import Shimmer from './Shimmer';
 4;
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+
+  const [inputValue, setInputValue] = useState('');
+  console.log('body rendered');
 
   const fetchResData = async () => {
     const data = await fetch(
@@ -16,33 +20,53 @@ const Body = () => {
     setRestaurantList(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    setFilteredList(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   useEffect(() => {
     fetchResData();
   }, []);
 
-  if (restaurantList.length === 0) {
-    return <Shimmer />;
-  }
-
-  return (
+  return restaurantList.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              console.log(inputValue);
+              const filteredRes = restaurantList.filter((res) =>
+                res.info.name.toLowerCase().includes(inputValue.toLowerCase())
+              );
+              setFilteredList(filteredRes);
+              setInputValue('');
+            }}
+          >
+            search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
             const filteredList = restaurantList.filter(
-              (res) => res.info.avgRating > 4.5
+              (res) => res.info.avgRating > 4
             );
-            setRestaurantList(filteredList);
+            setFilteredList(filteredList);
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
       <div className="res-container">
-        {restaurantList.map((res) => (
+        {filteredList.map((res) => (
           <RestaurantCards key={res.info.id} resList={res} />
         ))}
       </div>
