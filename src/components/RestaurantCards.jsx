@@ -1,7 +1,7 @@
 import { CDN_URL } from '../utils/constants';
 
 const RestaurantCards = ({ resList }) => {
-  const { name, cuisines, avgRating, costForTwo, cloudinaryImageId } =
+  const { name, cuisines, avgRating, costForTwo, cloudinaryImageId, sla } =
     resList.info;
 
   const styleCard = {
@@ -19,6 +19,7 @@ const RestaurantCards = ({ resList }) => {
       <h4>{cuisines.join(',')}</h4>
       <h4>{avgRating}</h4>
       <h4>{costForTwo}</h4>
+      <h4>{sla.slaString}</h4>
     </div>
   );
 };
