@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import { About, Body, Contact, Header, Error } from './components';
+import { About, Body, Contact, Error, Header } from './components';
 
 const AppLayout = () => {
   return (
