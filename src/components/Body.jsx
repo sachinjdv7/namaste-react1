@@ -5,18 +5,14 @@ import Shimmer from './Shimmer';
 const Body = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
-
   const [inputValue, setInputValue] = useState('');
-  console.log('body rendered');
 
   const fetchResData = async () => {
     const data = await fetch(
       'https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.4087934&lng=76.5603828&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
     );
     const json = await data.json();
-    console.log(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+
     setRestaurantList(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -42,7 +38,6 @@ const Body = () => {
           />
           <button
             onClick={() => {
-              console.log(inputValue);
               const filteredRes = restaurantList.filter((res) =>
                 res.info.name.toLowerCase().includes(inputValue.toLowerCase())
               );
