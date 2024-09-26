@@ -1,31 +1,16 @@
-import { useEffect, useState } from 'react';
 import { RestaurantCards } from '../components';
+import useBody from '../utils/useBody';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 4;
 const Body = () => {
-  const [restaurantList, setRestaurantList] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [inputValue, setInputValue] = useState('');
-
-  const fetchResData = async () => {
-    const data = await fetch(
-      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.4087934&lng=76.5603828&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
-    );
-    const json = await data.json();
-
-    setRestaurantList(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredList(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-  };
-
-  useEffect(() => {
-    fetchResData();
-  }, []);
-
+  const {
+    restaurantList,
+    setInputValue,
+    setFilteredList,
+    inputValue,
+    filteredList,
+  } = useBody();
   return restaurantList.length === 0 ? (
     <Shimmer />
   ) : (
