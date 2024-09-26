@@ -70,3 +70,7 @@
   width: 69px;
   height: 32px;
 }
+.user-card {
+  padding: 25px;
+  border: 1px solid violet;
+}
