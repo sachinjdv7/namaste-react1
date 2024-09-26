@@ -1,5 +1,6 @@
 import { RestaurantCards } from '../components';
 import useBody from '../utils/useBody';
+import useOnlineStatus from '../utils/useOnlineStatus';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 4;
@@ -11,6 +12,10 @@ const Body = () => {
     inputValue,
     filteredList,
   } = useBody();
+  const { onlineStatus } = useOnlineStatus();
+
+  if (onlineStatus === false)
+    return <h1>Looks like your internet connection is not online👾</h1>;
   return restaurantList.length === 0 ? (
     <Shimmer />
   ) : (
