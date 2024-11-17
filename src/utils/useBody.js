@@ -19,8 +19,6 @@ const useBody = () => {
     );
   };
 
-  console.log('reslist', restaurantList);
-
   useEffect(() => {
     fetchResData();
   }, []);

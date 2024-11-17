@@ -3,9 +3,15 @@ import { useParams } from 'react-router-dom';
 
 const useRestaurantMenu = () => {
   const [resInfo, setResInfo] = useState(null);
-  // console.log(resInfo.cards[2].card.card.info.name);
 
   const { resId } = useParams();
+
+  const categories =
+    resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.['card']?.['@type'] ===
+        'type.googleapis.com/swiggy.presentation.food.v2.ItemCategory'
+    );
 
   const fetchMenu = async () => {
     const data = await fetch(
@@ -18,7 +24,7 @@ const useRestaurantMenu = () => {
   useEffect(() => {
     fetchMenu();
   }, []);
-  return { resInfo };
+  return { resInfo, categories };
 };
 
 export default useRestaurantMenu;
