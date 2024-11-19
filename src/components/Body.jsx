@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { RestaurantCards, withOpenStatus } from '../components';
 import useBody from '../utils/useBody';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
+import UserContext from '../utils/UserContext';
 4;
 const Body = () => {
   const {
@@ -13,6 +15,8 @@ const Body = () => {
     filteredList,
   } = useBody();
   const { onlineStatus } = useOnlineStatus();
+
+  const { setUserName, loggedUser } = useContext(UserContext);
 
   const ResWithOpenStatus = withOpenStatus(RestaurantCards);
 
@@ -53,6 +57,15 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
+          <div>
+            <label>UserName: </label>
+            <input
+              className="border border-green-400 py-2"
+              type="text"
+              value={loggedUser}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
         </div>
       </div>
       <div className="flex flex-wrap ">

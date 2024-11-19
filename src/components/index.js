@@ -5,6 +5,7 @@ import Contact from './Contact';
 import About from './About';
 import Error from './Error';
 import RestaurantMenu from './RestaurantMenu';
+import ItemList from './ItemList';
 
 export {
   Body,
@@ -15,4 +16,5 @@ export {
   Error,
   RestaurantMenu,
   withOpenStatus,
+  ItemList,
 };
